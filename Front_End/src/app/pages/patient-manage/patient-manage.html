@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th scope="col">#</th>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">NIC</th>
@@ -17,8 +18,9 @@
     </tr>
   </thead>
   <tbody>
-    @for (patient of patientsList; track patient.id) {
+    @for (patient of patientsList; track patient.id ; let i =$index) {
     <tr>
+      <td>{{ i + 1 }}</td>
       <td>{{ patient.id }}</td>
       <td>{{ patient.name }}</td>
       <td>{{ patient.nic }}</td>
@@ -34,3 +36,6 @@
     }
   </tbody>
 </table>
+
+<input type="text" [(ngModel)]="customersList.name" placeholder="name" />
+<p>{{ customersList.name }}</p>

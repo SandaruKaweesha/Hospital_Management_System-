@@ -13,7 +13,7 @@ import lombok.*;
 public class PatientEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private  String name;
     private String nic;
