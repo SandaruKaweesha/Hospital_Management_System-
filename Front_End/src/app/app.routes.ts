@@ -24,6 +24,9 @@ export const routes: Routes = [
         children:[{
             path:"appointment",
             component:AppointmentManage
+        },{
+            path: 'patient',
+        component:PatientManage 
         }]
     }
 
