@@ -4,11 +4,11 @@ import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App implements OnInit{
+export class App implements OnInit {
   protected readonly title = signal('Front_End');
 
   ngOnInit(): void {
