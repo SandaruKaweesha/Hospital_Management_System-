@@ -75,10 +75,33 @@ export class PatientManage implements OnInit {
   }
 
   //Update Section
-  public patient: any = {};
-  updatePatient(patient: any) {
+  public selectpatient: any = {};
+  selectPatient(patient: any) {
     console.log(patient);
-    this.patient = patient;
+    this.selectpatient = patient;
+  }
+
+  updatePatient() {
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.http
+          .put('http://localhost:8080/patient/update', this.selectpatient)
+          .subscribe((data) => {
+            this.loadPatients();
+
+            Swal.fire('Saved!', '', 'success');
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
   }
 
   // public customersList:any={

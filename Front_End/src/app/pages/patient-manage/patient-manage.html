@@ -230,7 +230,7 @@
             data-modal-target="crud-modal"
             data-modal-toggle="crud-modal"
             class="cursor-pointer"
-            (click)="updatePatient(patient)"
+            (click)="selectPatient(patient)"
           >
             <svg
               class="w-6 h-6 text-gray-800 hover:text-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
@@ -302,12 +302,12 @@
         </button>
       </div>
       <!-- Modal body -->
-      <form class="p-4 md:p-5">
+      <div class="p-4 md:p-5">
         <div class="grid gap-4 mb-4 grid-cols-2">
           <div class="col-span-2">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
             <input
-              [(ngModel)]="patient.name"
+              [(ngModel)]="selectpatient.name"
               type="text"
               name="name"
               id="name"
@@ -319,6 +319,7 @@
           <div class="col-span-2 sm:col-span-1">
             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
             <input
+              [(ngModel)]="selectpatient.age"
               type="number"
               name="price"
               id="price"
@@ -329,17 +330,14 @@
           </div>
           <div class="col-span-2 sm:col-span-1">
             <label for="category" class="block mb-2 text-sm font-medium text-gray-900"
-              >Category</label
+              >Gender</label
             >
             <select
               id="category"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
             >
-              <option selected="">Select category</option>
-              <option value="TV">TV/Monitors</option>
-              <option value="PC">PC</option>
-              <option value="GA">Gaming/Console</option>
-              <option value="PH">Phones</option>
+              <option selected="">{{ selectpatient.gender }}</option>
+              <option value="TV">Female</option>
             </select>
           </div>
           <div class="col-span-2">
@@ -351,12 +349,15 @@
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Write product description here"
+              [(ngModel)]="selectpatient.note"
             ></textarea>
           </div>
         </div>
         <button
-          type="submit"
+          type="button"
+          (click)="updatePatient()"
           class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          data-modal-hide="crud-modal"
         >
           <svg
             class="me-1 -ms-1 w-5 h-5"
@@ -372,7 +373,7 @@
           </svg>
           Update Details
         </button>
-      </form>
+      </div>
     </div>
   </div>
 </div>
