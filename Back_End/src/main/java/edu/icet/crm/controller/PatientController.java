@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/patient")
+@CrossOrigin
 public class PatientController {
 
     final PatientService  patientService;
 
     @GetMapping("/get")
+//    @GetMapping("/admin/get")
+//    @PreAuthorize("hasRole('ADMIN')")
     public List<Patient> getData(){
         return patientService.getPatient();
     }
