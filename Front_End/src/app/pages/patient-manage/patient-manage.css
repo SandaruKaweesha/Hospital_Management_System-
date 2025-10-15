@@ -1,0 +1,8 @@
+.is-active.group-hover\:border-gray-300 {
+  border-bottom-color: transparent !important;
+  
+}
+
+.is-active.group-hover\:text-gray-300 {
+  color: inherit !important;
+}

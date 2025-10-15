@@ -3,11 +3,11 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { initFlowbite } from 'flowbite';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-patient-manage',
-  imports: [FormsModule, RouterOutlet, RouterLink],
+  imports: [FormsModule, RouterOutlet, RouterLink, RouterModule],
   templateUrl: './patient-manage.html',
   styleUrls: ['./patient-manage.css'],
 })

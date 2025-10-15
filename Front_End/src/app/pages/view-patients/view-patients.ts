@@ -2,32 +2,56 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import Swal from 'sweetalert2';
+import { Patient } from '../../model/Patient';
+import { map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-patients',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './view-patients.html',
   styleUrl: './view-patients.css',
 })
 export class ViewPatients implements OnInit {
-  public patientsList: any = [];
-
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     initFlowbite();
     this.loadPatients();
   }
-  // Load the data from backend
-  loadPatients() {
-    this.http.get('http://localhost:8080/patient/get').subscribe((data) => {
-      this.patientsList = data;
-      // app is using zoneless change detection (provideZonelessChangeDetection),
-      // so manually request a view update after async data arrives.
-      this.cdr.detectChanges();
 
-      initFlowbite();
-      // Initialize Flowbite after the data is loaded and the view is updated.
-    });
+  // Load the data from backend
+  public patientsList: Patient[] = [];
+  loadPatients() {
+    this.http
+      .get<any[]>('http://localhost:8080/patient/get')
+      .pipe(
+        map((jsonArray) =>
+          jsonArray.map(
+            (json) =>
+              new Patient(
+                json.id,
+                json.name,
+                json.nic,
+                json.address,
+                json.bloodGroup,
+                json.category,
+                json.gender,
+                json.contact,
+                json.note,
+                json.age,
+                json.allergies
+              )
+          )
+        )
+      )
+      .subscribe((builtPatients: Patient[]) => {
+        this.patientsList = builtPatients;
+        console.log(this.patientsList);
+        // app is using zoneless change detection (provideZonelessChangeDetection)    // so manually request a view update after async data arrives.
+        this.cdr.detectChanges();
+        initFlowbite();
+        // Initialize Flowbite after the data is loaded and the view is updated.
+      });
   }
 
   deletePatient(id: any) {
@@ -74,10 +98,11 @@ export class ViewPatients implements OnInit {
   }
 
   //Update Section
+  // public selectpatient: Patient | null = null;
   public selectpatient: any = {};
-  selectPatient(patient: any) {
-    console.log(patient);
+  selectPatient(patient: Patient) {
     this.selectpatient = patient;
+    console.log(this.selectpatient);
   }
 
   updatePatient() {

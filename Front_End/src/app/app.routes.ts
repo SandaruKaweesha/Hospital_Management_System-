@@ -41,7 +41,7 @@ export const routes: Routes = [
             component: ViewPatients,
           },
           {
-            path: 'addfrom',
+            path: 'addform',
             component: PatientAddForm,
           },
         ],
