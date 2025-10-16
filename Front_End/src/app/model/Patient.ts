@@ -71,4 +71,10 @@ export class Patient {
   public getAllergies(): string {
     return this.allergies;
   }
+
+  //
+
+  public setName(name: string) {
+    this.name = name;
+  }
 }
