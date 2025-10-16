@@ -16,20 +16,22 @@ export class PatientAddForm {
 
   constructor(private http: HttpClient) {}
 
-  onFileSelected(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedFile = inputElement.files[0];
-      console.log('Selected file:', this.selectedFile);
-      this.report?.setFile(this.selectedFile);
-    }
-  }
+  // onFileSelected(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement.files && inputElement.files.length > 0) {
+  //     this.selectedFile = inputElement.files[0];
+  //     console.log('Selected file:', this.selectedFile);
+  //     this.report?.setFile(this.selectedFile);
+  //   }
+  // }
 
   addReport() {
     // this.formData.append('file', this.selectedFile as Blob);
-    this.http.post('http://localhost:8080/medical-report/save', this.report).subscribe((data) => {
-      console.log('Report Added');
-    });
+    // this.http.post('http://localhost:8080/medical-report/save', this.report).subscribe((data) => {
+    //   console.log('Report Added');
+    // });
+
+    console.log('hello World');
   }
 
   //

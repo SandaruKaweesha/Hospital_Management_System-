@@ -16,7 +16,7 @@ public class Patient {
     private String address;
     private  String bloodGroup;
     private  String category;
-    private String gender;
+    private String   gender;
     private  String contact;
     private  String note;
     private  String age;
