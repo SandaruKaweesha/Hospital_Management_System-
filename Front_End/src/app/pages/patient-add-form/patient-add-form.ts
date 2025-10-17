@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Patient } from '../../model/Patient';
+
 import {
   FormControl,
   FormGroup,
@@ -7,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-patient-add-form',
@@ -15,6 +18,8 @@ import {
   styleUrl: './patient-add-form.css',
 })
 export class PatientAddForm {
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+
   userForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
@@ -64,6 +69,26 @@ export class PatientAddForm {
       if (this.patientNote == '') {
         this.patientNote = 'No';
       }
+      console.log(this.setObject());
+      this.http.post('http://localhost:8080/patient/save', this.setObject()).subscribe((data) => {
+        console.log('We Fucked It');
+      });
     }
+  }
+
+  setObject(): Patient {
+    return new Patient(
+      0,
+      this.patientName,
+      this.patientNic,
+      this.patientAddress,
+      this.patientBloodGroup,
+      this.patientCategory,
+      this.patientGender,
+      this.patientContactNumber,
+      this.patientNote,
+      this.patientAge,
+      this.patientAllergies
+    );
   }
 }

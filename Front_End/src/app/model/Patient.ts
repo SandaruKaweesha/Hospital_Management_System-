@@ -7,7 +7,7 @@ export class Patient {
   private category: string;
   private gender: string;
   private contact: string;
-  private notes: string;
+  private note: string;
   private age: string;
   private allergies: string;
 
@@ -20,7 +20,7 @@ export class Patient {
     category: string,
     gender: string,
     contact: string,
-    notes: string,
+    note: string,
     age: string,
     allergies: string
   ) {
@@ -32,7 +32,7 @@ export class Patient {
     this.category = category;
     this.gender = gender;
     this.contact = contact;
-    this.notes = notes;
+    this.note = note;
     this.age = age;
     this.allergies = allergies;
   }
@@ -63,7 +63,7 @@ export class Patient {
     return this.contact;
   }
   public getNotes(): string {
-    return this.notes;
+    return this.note;
   }
   public getAge(): string {
     return this.age;
