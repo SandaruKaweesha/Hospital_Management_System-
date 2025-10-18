@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-add-form',
@@ -70,8 +71,31 @@ export class PatientAddForm {
         this.patientNote = 'No';
       }
       console.log(this.setObject());
-      this.http.post('http://localhost:8080/patient/save', this.setObject()).subscribe((data) => {
-        console.log('We Fucked It');
+      this.http.post('http://localhost:8080/patient/save', this.setObject()).subscribe({
+        next: (respond) => {
+          console.log('We Fucked It');
+          Swal.fire({
+            title: 'Done',
+            icon: 'success',
+            draggable: true,
+          });
+
+          this.userForm.reset();
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
+          this.userForm.reset();
+        },
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
       });
     }
   }
@@ -92,3 +116,12 @@ export class PatientAddForm {
     );
   }
 }
+
+// this.http.post('http://localhost:8080/patient/save', this.setObject()).subscribe((data) => {
+//         console.log('We Fucked It');
+//         Swal.fire({
+//           title: 'Done',
+//           icon: 'success',
+//           draggable: true,
+//         });
+//       });

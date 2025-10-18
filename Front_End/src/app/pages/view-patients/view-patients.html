@@ -306,25 +306,43 @@
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
             <input
               [(ngModel)]="selectpatient.name"
+              #name="ngModel"
               type="text"
               name="name"
               id="name"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
               placeholder="Type product name"
-              required=""
+              required
             />
+            @if(name.invalid && (name.dirty || name.touched)){
+            <div class="text-amber-800 text-sm">
+              @if(name.errors?.['required']){
+              <span>This is Required</span>
+              }
+            </div>
+            }
           </div>
           <div class="col-span-2 sm:col-span-1">
             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
             <input
               [(ngModel)]="selectpatient.age"
+              #age="ngModel"
               type="number"
-              name="price"
-              id="price"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-              placeholder="$2999"
-              required=""
+              required
+              min="0"
+              max="120"
             />
+            @if (age.invalid && (age.dirty || age.touched)){
+            <div class="text-amber-800 text-sm">
+              @if(age.errors?.['required']){
+              <span>This is Required</span>
+              } @if(age.errors?.['min']){
+              <span>Age cannot be a negative number.</span>
+              } @if(age.errors?.['max']){
+              <span>Please enter a realistic age.</span>}
+            </div>
+            }
           </div>
           <div class="col-span-2 sm:col-span-1">
             <label for="category" class="block mb-2 text-sm font-medium text-gray-900"
@@ -334,8 +352,9 @@
               id="category"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
             >
-              <option selected="">{{ 'hello' }}</option>
-              <option value="TV">Female</option>
+              <option selected disabled value="">{{ selectpatient.gender }}</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
           </div>
           <div class="col-span-2">
@@ -343,7 +362,7 @@
               >Note</label
             >
             <textarea
-              [(ngModel)]="selectpatient.notes"
+              [(ngModel)]="selectpatient.note"
               id="description"
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -353,6 +372,7 @@
         </div>
         <button
           type="button"
+          [disabled]="name.invalid || age.invalid"
           (click)="updatePatient()"
           class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           data-modal-hide="crud-modal"
