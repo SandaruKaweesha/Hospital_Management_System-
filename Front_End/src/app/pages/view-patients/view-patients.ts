@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, OnInit, signal } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import Swal from 'sweetalert2';
 import { Patient } from '../../model/Patient';
@@ -21,6 +21,7 @@ export class ViewPatients implements OnInit {
 
   // Load the data from backend
   public patientsList: Patient[] = [];
+
   loadPatients() {
     this.http
       .get<any[]>('http://localhost:8080/patient/get')
@@ -126,5 +127,9 @@ export class ViewPatients implements OnInit {
         Swal.fire('Changes are not saved', '', 'info');
       }
     });
+  }
+
+  searchPatient() {
+    console.log('Hello');
   }
 }
