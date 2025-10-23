@@ -1,5 +1,5 @@
 export class Patient {
-  public id: number;
+  private id: number;
   private name: string;
   private nic: string;
   private address: string;
