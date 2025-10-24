@@ -1,4 +1,4 @@
-export class AppoimentP {
+export class Appoiment {
   private id: number;
   private type: string;
   private qr: string;

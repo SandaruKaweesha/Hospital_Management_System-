@@ -92,24 +92,24 @@
       </tr>
     </thead>
     <tbody>
-      @for(appointment of appointmentsList ; track appointment.id;let i = $index){
+      @for(appointment of appointmentsList ; track appointment.getID();let i = $index){
       <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
         <td class="px-6 py-4">{{ i + 1 }}</td>
-        <td class="px-6 py-4">{{ appointment.id }}</td>
+        <td class="px-6 py-4">{{ appointment.getID() }}</td>
 
         <td class="px-6 py-4">
           <div class="flex items-center">
             <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-            {{ appointment.status }}
+            {{ appointment.getStatus() }}
           </div>
         </td>
-        <td class="px-6 py-4">{{ appointment.type }}</td>
-        <td class="px-6 py-4">{{ appointment.dateAndtime }}</td>
-        <td class="px-6 py-4">{{ appointment.roomNumber }}</td>
-        <td class="px-6 py-4">{{ appointment.qNumber }}</td>
+        <td class="px-6 py-4">{{ appointment.getType() }}</td>
+        <td class="px-6 py-4">{{ appointment.getLocalDateTime() }}</td>
+        <td class="px-6 py-4">{{ appointment.getRoomNumber() }}</td>
+        <td class="px-6 py-4">{{ appointment.getQnumber() }}</td>
 
         <td class="px-6 py-4 gap-6 flex">
-          <button class="cursor-pointer" (click)="deleteAppointment(appointment.id)">
+          <button class="cursor-pointer" (click)="deleteAppointment(appointment.getID())">
             <svg
               class="w-6 h-6 text-gray-800 hover:text-red-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
               aria-hidden="true"

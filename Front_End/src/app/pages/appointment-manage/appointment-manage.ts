@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Appoiment } from '../../model/Appointment';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-manage',
@@ -9,18 +11,39 @@ import Swal from 'sweetalert2';
   styleUrl: './appointment-manage.css',
 })
 export class AppointmentManage implements OnInit {
-  public appointmentsList: any = [];
+  public appointmentsList: Appoiment[] = [];
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.loadAppointments();
   }
 
   loadAppointments() {
-    this.http.get('http://localhost:8080/appointment/viewAll').subscribe((data) => {
-      console.log(data);
-      this.appointmentsList = data;
-      this.cdr.detectChanges();
-    });
+    this.http
+      .get<any[]>('http://localhost:8080/appointment/viewAll')
+      .pipe(
+        map((jsonArray) =>
+          jsonArray.map(
+            (json) =>
+              new Appoiment(
+                json.id,
+                json.type,
+                json.qr,
+                json.localDateTime,
+                json.description,
+                json.status,
+                json.roomNumber,
+                json.qNumber,
+                json.patientId,
+                json.adminId
+              )
+          )
+        )
+      )
+      .subscribe((builtAppointment: Appoiment[]) => {
+        this.appointmentsList = builtAppointment;
+        console.log(builtAppointment);
+        this.cdr.detectChanges();
+      });
   }
 
   deleteAppointment(id: any) {
