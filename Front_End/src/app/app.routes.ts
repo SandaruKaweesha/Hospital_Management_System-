@@ -5,6 +5,8 @@ import { Login } from './pages/login/login';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { PatientAddForm } from './pages/patient-add-form/patient-add-form';
 import { ViewPatients } from './pages/view-patients/view-patients';
+import { ViewAppointment } from './pages/view-appointment/view-appointment';
+import { AddAppointment } from './pages/add-appointment/add-appointment';
 
 export const routes: Routes = [
   {
@@ -26,6 +28,21 @@ export const routes: Routes = [
       {
         path: 'appointment',
         component: AppointmentManage,
+        children: [
+          {
+            path: '',
+            redirectTo: 'viewAppointment',
+            pathMatch: 'full',
+          },
+          {
+            path: 'viewAppointment',
+            component: ViewAppointment,
+          },
+          {
+            path: 'addform',
+            component: AddAppointment,
+          },
+        ],
       },
       {
         path: 'patient',
