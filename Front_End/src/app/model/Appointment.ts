@@ -1,11 +1,11 @@
-export class Appoiment {
+export class Appointment {
   private id: number;
   private type: string;
   private qr: string;
-  private localDateTime: string;
+  public dateAndTime: string | null;
   private description: string;
   private status: string;
-  private roomNumber: number;
+  private roomNumber: string;
   private qNumber: number;
   private patientId: number;
   private adminId: number;
@@ -14,10 +14,10 @@ export class Appoiment {
     id: number,
     type: string,
     qr: string,
-    localDateTime: string,
+    dateAndTime: string,
     description: string,
     status: string,
-    roomNumber: number,
+    roomNumber: string,
     qNumber: number,
     patientId: number,
     adminId: number
@@ -25,7 +25,7 @@ export class Appoiment {
     this.id = id;
     this.type = type;
     this.qr = qr;
-    this.localDateTime = localDateTime;
+    this.dateAndTime = dateAndTime;
     this.description = description;
     this.status = status;
     this.roomNumber = roomNumber;
@@ -43,16 +43,14 @@ export class Appoiment {
   public getQr(): string {
     return this.qr;
   }
-  public getLocalDateTime(): string {
-    return this.localDateTime;
-  }
+
   public getLocalDescription(): string {
     return this.description;
   }
   public getStatus(): string {
     return this.status;
   }
-  public getRoomNumber(): number {
+  public getRoomNumber(): string {
     return this.roomNumber;
   }
   public getQnumber(): number {

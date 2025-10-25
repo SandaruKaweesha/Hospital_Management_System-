@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +15,11 @@ public class Appointment {
     private int id;
     private String type;
     private String qr;
-    private LocalDate dateAndtime;
+    private Instant dateAndtime;
     private String description;
     private String status;
-    private int roomNumber;
+    private String roomNumber;
     private int qNumber;
-
     private int patientId;
     private int adminId;
 }

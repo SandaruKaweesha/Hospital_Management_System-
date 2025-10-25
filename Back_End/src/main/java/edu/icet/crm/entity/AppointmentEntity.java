@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -19,12 +20,11 @@ public class AppointmentEntity {
     private int id;
     private String type;
     private String qr;
-    private LocalDate dateAndtime;
+    private LocalDateTime dateAndtime;
     private String description;
     private String status;
-    private int roomNumber;
+    private String roomNumber;
     private int qNumber;
-
     private int patientId;
     private int adminId;
 }

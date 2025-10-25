@@ -1,9 +1,9 @@
 package edu.icet.crm.controller;
 
-
 import edu.icet.crm.model.Appointment;
 import edu.icet.crm.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +13,8 @@ import java.util.List;
 @RequestMapping("/appointment")
 @RequiredArgsConstructor
 @CrossOrigin
+@Slf4j
+@SuppressWarnings("unused")
 public class AppointmentController {
 
     final AppointmentService appointmentService;
@@ -20,6 +22,7 @@ public class AppointmentController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAppointment(@RequestBody Appointment appointment){
+        log.error(appointment.toString());
         appointmentService.addAppointment(appointment);
     }
 

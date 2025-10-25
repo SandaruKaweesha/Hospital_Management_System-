@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Appoiment } from '../../model/Appointment';
+import { Appointment } from '../../model/Appointment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { map } from 'rxjs';
   styleUrl: './view-appointment.css',
 })
 export class ViewAppointment implements OnInit {
-  public appointmentsList: Appoiment[] = [];
+  public appointmentsList: Appointment[] = [];
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class ViewAppointment implements OnInit {
         map((jsonArray) =>
           jsonArray.map(
             (json) =>
-              new Appoiment(
+              new Appointment(
                 json.id,
                 json.type,
                 json.qr,
@@ -40,7 +40,7 @@ export class ViewAppointment implements OnInit {
           )
         )
       )
-      .subscribe((builtAppointment: Appoiment[]) => {
+      .subscribe((builtAppointment: Appointment[]) => {
         this.appointmentsList = builtAppointment;
         console.log(builtAppointment);
         this.cdr.detectChanges();

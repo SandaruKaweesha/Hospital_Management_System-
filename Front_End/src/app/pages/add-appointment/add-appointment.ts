@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Appointment } from '../../model/Appointment';
 
 @Component({
   selector: 'app-add-appointment',
@@ -51,7 +52,51 @@ export class AddAppointment implements OnInit {
     description: new FormControl(''),
   });
 
-  addReport() {
-    console.log('Fuck');
+  public appointmentID: number = 0;
+  public appointmentType: string = '';
+  public appointmentQr: string = '';
+  //public appointmentLocalDateTime: Date;
+  public appointmentDescription: string = '';
+  public appointmentStatus: string = '';
+  public appointmentRoomNumber: number = 0;
+  public appointmentQnumber: number = 0;
+  public appointmentpatientId: number = 0;
+  public appointmentDoctorId: number = 0;
+
+  addAppointment() {
+    this.appointmentDescription = this.userForm.get('description')?.value;
+    this.appointmentStatus = this.userForm.get('status')?.value;
+
+    if (this.appointmentDescription == '') {
+      this.appointmentDescription = 'No';
+    }
+    if (this.appointmentStatus == '') {
+      this.appointmentStatus = 'No';
+      this;
+    }
+    this.http
+      .post('http://localhost:8080/appointment/add', this.setAppoitment())
+      .subscribe((data) => {
+        console.log('Hello World');
+      });
+  }
+
+  setAppoitment(): Appointment {
+    const dateValue = this.userForm.get('myDateControl')?.value; // might be a string or Date
+    const isoDateString = new Date(dateValue!).toISOString(); // ISO string
+
+    // If your Appointment model expects a Date, you can still send string in HTTP.
+    return new Appointment(
+      0,
+      this.userForm.get('category')?.value,
+      this.userForm.get('qr')?.value,
+      isoDateString, // IMPORTANT: pass ISO string here
+      this.appointmentDescription,
+      this.appointmentStatus,
+      this.userForm.get('roomNumber')?.value,
+      this.userForm.get('queueNumber')?.value,
+      this.userForm.get('patientID')?.value,
+      this.userForm.get('adminID')?.value
+    );
   }
 }
