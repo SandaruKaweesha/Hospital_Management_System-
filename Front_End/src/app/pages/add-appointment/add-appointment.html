@@ -3,6 +3,42 @@
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
       <h2 class="mb-4 text-xl font-bold text-gray-900">Add A New Appointment</h2>
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <!-- Patient ID -->
+        <div class="w-full">
+          <label for="brand" class="block mb-2 text-sm font-medium">Patient ID</label>
+          <input
+            type="text"
+            formControlName="patientID"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Patient ID"
+          />
+          @if(userForm.controls['patientID'].touched){
+          <div class="text-amber-800 text-sm">
+            @if(userForm.controls['patientID'].errors?.['required']){
+            <span>This is Required</span>
+            }
+          </div>
+          }
+        </div>
+        <!-- Admin ID -->
+        <div class="w-full">
+          <label for="brand" class="block mb-2 text-sm font-medium">Doctor ID</label>
+          <input
+            type="text"
+            formControlName="adminID"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Doctor ID"
+          />
+          @if(userForm.controls['adminID'].touched){
+          <div class="text-amber-800 text-sm">
+            @if(userForm.controls['adminID'].errors?.['required']){
+            <span>This is Required</span>
+            }
+          </div>
+          }
+        </div>
         <!-- Appointment type-->
         <div class="sm:col-span-2">
           <label for="category" class="block mb-2 text-sm font-medium">Appointment Type</label>
@@ -57,154 +93,120 @@
           </div>
           }
         </div>
-        <!-- Patient Address -->
-        <div class="sm:col-span-2">
+        <!-- Set the date -->
+        <div class="w-full">
+          <label for="brand" class="block mb-2 text-sm font-medium">Date</label>
+          <input
+            type="datetime-local"
+            formControlName="myDateControl"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Doctor ID"
+            [min]="minDate"
+          />
+          @if(userForm.controls['myDateControl'].touched){
+          <div class="text-amber-800 text-sm">
+            @if(userForm.controls['myDateControl'].errors?.['required']){
+            <span>This is Required</span>
+            }
+          </div>
+          }
+        </div>
+        <!-- Appointment qr -->
+        <div class="w-full">
           <label for="address" class="block mb-2 text-sm font-medium text-gray-900"
-            >Patient Address</label
+            >Appointment Qr</label
           >
           <input
             type="text"
-            formControlName="address"
+            formControlName="qr"
             id="name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
             placeholder="Type patient Address"
           />
-          @if(userForm.controls['address'].touched){
+          @if(userForm.controls['qr'].touched){
           <div class="text-amber-800 text-sm">
-            @if(userForm.controls['address'].errors?.['required']){
+            @if(userForm.controls['qr'].errors?.['required']){
             <span>This is Required</span>
             }
           </div>
           }
         </div>
-        <!-- Patient NIC Number -->
+        <!-- Appointment Room -->
         <div class="w-full">
-          <label for="brand" class="block mb-2 text-sm font-medium">NIC</label>
-          <input
-            type="text"
-            formControlName="nic"
-            id="brand"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="Patient nic number"
-          />
-          @if(userForm.controls['nic'].touched){
+          <label for="category" class="block mb-2 text-sm font-medium">Room Number</label>
+          <select
+            formControlName="roomNumber"
+            id="category"
+            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+          >
+            <option selected disabled value="">Select Room Number</option>
+
+            <optgroup label="General & Primary Care">
+              <option value="G-01">G-01</option>
+              <option value="G-02">G-01</option>
+              <option value="G-03">G-01</option>
+              <option value="G-04">G-05</option>
+            </optgroup>
+
+            <optgroup label="Medical Specialties">
+              <option value="M-01">M-01</option>
+              <option value="M-02">M-02</option>
+              <option value="M-03">M-03</option>
+            </optgroup>
+
+            <optgroup label="Surgical Specialties">
+              <option value="S-01">S-01</option>
+              <option value="S-02">S-02</option>
+              <option value="S-03">S-03</option>
+              <option value="S-04">S-04</option>
+            </optgroup>
+
+            <optgroup label="Other Categories">
+              <option value="O-01">O-01</option>
+              <option value="O-02">O-02</option>
+            </optgroup>
+          </select>
+          @if(userForm.controls['category'].touched){
           <div class="text-amber-800 text-sm">
-            @if(userForm.controls['nic'].errors?.['required']){
+            @if(userForm.controls['category'].errors?.['required']){
             <span>This is Required</span>
             }
           </div>
           }
         </div>
-        <!-- Patient Age -->
+        <!-- queue -->
         <div class="w-full">
-          <label for="brand" class="block mb-2 text-sm font-medium">Age</label>
+          <label for="brand" class="block mb-2 text-sm font-medium">Queue Number</label>
           <input
             type="number"
             id="brand"
-            formControlName="age"
+            formControlName="queueNumber"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="Patient Age"
             required=""
-          />@if(userForm.controls['age'].invalid && (userForm.controls['age'].dirty
-          ||userForm.controls['age'].touched)){
-          <div class="text-amber-800 text-sm">
-            @if(userForm.controls['age'].errors?.['required']){
-            <span>This is Required</span>
-            } @if(userForm.controls['age'].errors?.['min']){
-            <span>Age cannot be a negative number.</span>
-            } @if(userForm.controls['age'].errors?.['max']){
-            <span>Please enter a realistic age.</span>
-            }
-          </div>
-          }
-        </div>
-        <!-- Patient Gender -->
-        <div>
-          <label for="category" class="block mb-2 text-sm font-medium">Gender</label>
-          <select
-            formControlName="gender"
-            id="category"
-            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-          >
-            <option selected disabled value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-          @if(userForm.controls['gender'].touched){
-          <div class="text-amber-800 text-sm">
-            @if(userForm.controls['gender'].errors?.['required']){
-            <span>This is Required</span>
-            }
-          </div>
-          }
-        </div>
-        <!-- Patient Category -->
-
-        <!-- Blood Group -->
-        <div>
-          <label for="category" class="block mb-2 text-sm font-medium">Blood Group</label>
-          <select
-            formControlName="bloodGroup"
-            id="category"
-            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-          >
-            <option selected disabled value="">Blood Group</option>
-            <option value="O+">O+</option>
-            <option value="A+">A+</option>
-            <option value="B+">B+</option>
-            <option value="AB+">AB+</option>
-            <option value="O-">O-</option>
-            <option value="A-">A-</option>
-            <option value="B-">B-</option>
-            <option value="AB-">AB-</option>
-          </select>
-          @if(userForm.controls['bloodGroup'].touched){
-          <div class="text-amber-800 text-sm">
-            @if(userForm.controls['bloodGroup'].errors?.['required']){
-            <span>This is Required</span>
-            }
-          </div>
-          }
-        </div>
-        <!-- Patient Contact Number -->
-        <div class="w-full">
-          <label for="brand" class="block mb-2 text-sm font-medium">Contact Number</label>
-          <input
-            type="tel"
-            formControlName="contactNumber"
-            id="phoneNumber"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="e.g., 0771234567"
           />
-          @if(contactNumber?.invalid && (contactNumber?.dirty || contactNumber?.touched)){
-          <div class="text-amber-800 text-sm">
-            @if(contactNumber?.errors?.['required']){
-            <span>This is Required</span>
-            } @if(contactNumber?.errors?.['pattern']){
-            <span>Please enter a valid 10-digit phone number.</span>
-            }
-          </div>
-          }
         </div>
-        <!--  -->
+
+        <!-- Status -->
         <div class="sm:col-span-2 mb-3">
           <label for="description" class="block mb-2 text-sm font-medium text-gray-900"
-            >Allergies</label
+            >Status</label
           >
           <textarea
             id="description"
             rows="4"
-            formControlName="allergies"
+            formControlName="status"
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
             placeholder="Do you have any allergies"
           ></textarea>
         </div>
       </div>
-      <!-- Patient Note -->
+      <!-- description -->
       <div class="sm:col-span-2">
-        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Note</label>
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900"
+          >Description</label
+        >
         <textarea
-          formControlName="note"
+          formControlName="description"
           id="note"
           rows="8"
           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
