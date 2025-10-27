@@ -55,7 +55,7 @@ export class AddAppointment implements OnInit {
   public appointmentID: number = 0;
   public appointmentType: string = '';
   public appointmentQr: string = '';
-  //public appointmentLocalDateTime: Date;
+  public appointmentLocalDateTime: string = '';
   public appointmentDescription: string = '';
   public appointmentStatus: string = '';
   public appointmentRoomNumber: number = 0;
@@ -80,17 +80,17 @@ export class AddAppointment implements OnInit {
         console.log('Hello World');
       });
   }
-
+  public app: any;
   setAppoitment(): Appointment {
-    const dateValue = this.userForm.get('myDateControl')?.value; // might be a string or Date
-    const isoDateString = new Date(dateValue!).toISOString(); // ISO string
-
+    this.appointmentLocalDateTime = this.userForm.get('myDateControl')?.value; // might be a string or Date
+    //this.appointmentLocalDateTime = new Date(this.appointmentLocalDateTime!).toISOString(); // ISO string
+    console.log(typeof this.appointmentLocalDateTime);
     // If your Appointment model expects a Date, you can still send string in HTTP.
-    return new Appointment(
+    this.app = new Appointment(
       0,
       this.userForm.get('category')?.value,
       this.userForm.get('qr')?.value,
-      isoDateString, // IMPORTANT: pass ISO string here
+      this.appointmentLocalDateTime, // IMPORTANT: pass ISO string here
       this.appointmentDescription,
       this.appointmentStatus,
       this.userForm.get('roomNumber')?.value,
@@ -98,5 +98,7 @@ export class AddAppointment implements OnInit {
       this.userForm.get('patientID')?.value,
       this.userForm.get('adminID')?.value
     );
+    console.log(typeof this.app.dateAndTime);
+    return this.app;
   }
 }
