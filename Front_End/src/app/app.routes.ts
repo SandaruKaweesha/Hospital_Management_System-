@@ -7,6 +7,9 @@ import { PatientAddForm } from './pages/patient-add-form/patient-add-form';
 import { ViewPatients } from './pages/view-patients/view-patients';
 import { ViewAppointment } from './pages/view-appointment/view-appointment';
 import { AddAppointment } from './pages/add-appointment/add-appointment';
+import { MedicalReportManage } from './pages/medical-report-manage/medical-report-manage';
+import { ViewReports } from './pages/view-reports/view-reports';
+import { AddMedicalReport } from './pages/add-medical-report/add-medical-report';
 
 export const routes: Routes = [
   {
@@ -60,6 +63,25 @@ export const routes: Routes = [
           {
             path: 'addform',
             component: PatientAddForm,
+          },
+        ],
+      },
+      {
+        path: 'reports',
+        component: MedicalReportManage,
+        children: [
+          {
+            path: '',
+            redirectTo: 'viewReport',
+            pathMatch: 'full',
+          },
+          {
+            path: 'viewReport',
+            component: ViewReports,
+          },
+          {
+            path: 'addReport',
+            component: AddMedicalReport,
           },
         ],
       },

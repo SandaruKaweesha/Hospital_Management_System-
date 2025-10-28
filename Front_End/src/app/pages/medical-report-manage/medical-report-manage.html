@@ -1,1 +1,54 @@
-<p>medical-report-manage works!</p>
+<div class="border-b border-gray-200 mb-5">
+  <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500">
+    <li class="me-2">
+      <a
+        routerLink="viewReport"
+        routerLinkActive="bg-blue-100 text-blue-700 hover:bg-blue-100 border-b-2 hover:text-blue-700  border-blue-600 "
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="inline-flex items-center justify-center p-4 rounded-t-lg active group"
+        aria-current="page"
+      >
+        <svg
+          class="w-4 h-4 me-2"
+          routerLinkActive=" text-blue-600"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 18 18"
+        >
+          <path
+            d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
+          />
+        </svg>
+        View Reports
+      </a>
+    </li>
+    <li class="me-2">
+      <a
+        routerLink="addReport"
+        routerLinkActive="bg-blue-100 text-blue-700 hover:bg-blue-100 border-b-2 hover:text-blue-700  border-blue-600 "
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="inline-flex items-center justify-center p-4 rounded-t-lg active group"
+      >
+        <svg
+          class="me-2"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Add Report
+      </a>
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
