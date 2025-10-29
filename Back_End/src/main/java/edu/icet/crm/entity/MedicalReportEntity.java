@@ -20,7 +20,7 @@ public class MedicalReportEntity {
     private  String category;
     private  String pdfSrc;
     private LocalDate dateTime;
-    
+
     private int patientId;
     private int adminId;
     private int labNumber;
