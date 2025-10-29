@@ -4,8 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-view-reports',
   imports: [],
   templateUrl: './view-reports.html',
-  styleUrl: './view-reports.css'
+  styleUrl: './view-reports.css',
 })
 export class ViewReports {
-
+  selectPatient() {}
+  updateReport() {}
 }
