@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MedicalReport } from '../../model/MedicalReport';
 import { map } from 'rxjs';
+import { joinAllInternals } from 'rxjs/internal/operators/joinAllInternals';
 
 @Component({
   selector: 'app-view-reports',
@@ -10,7 +11,7 @@ import { map } from 'rxjs';
   styleUrl: './view-reports.css',
 })
 export class ViewReports implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.loadReports();
   }
@@ -24,22 +25,22 @@ export class ViewReports implements OnInit {
           jsonArray.map(
             (json) =>
               new MedicalReport(
+                json.id,
                 json.category,
                 json.pdfSrc,
                 json.dateTime,
                 json.patientId,
                 json.adminId,
                 json.labNumber
-              ) // <-- Pass the whole object
+              )
           )
         )
       )
       .subscribe((medicalRecord: MedicalReport[]) => {
         this.allReport = medicalRecord;
-        console.log(typeof this.allReport[1].getDate());
+        this.cdr.detectChanges();
       });
   }
-
   selectPatient() {}
   updateReport() {}
 }

@@ -1,4 +1,5 @@
 export class MedicalReport {
+  private id: number;
   private category: string;
   private pdfSrc: string;
   private dateTime: Date;
@@ -7,6 +8,7 @@ export class MedicalReport {
   private labNumber: number;
 
   constructor(
+    id: number,
     category: string,
     pdfSrc: string,
     dateTime: Date,
@@ -14,6 +16,7 @@ export class MedicalReport {
     adminId: number,
     labNumber: number
   ) {
+    this.id = id;
     this.category = category;
     this.pdfSrc = pdfSrc;
     this.dateTime = dateTime;
@@ -23,6 +26,10 @@ export class MedicalReport {
   }
   public setFile(file: File) {
     //this.file = file;
+  }
+
+  public getId(): number {
+    return this.id;
   }
 
   public getCategory(): string {
