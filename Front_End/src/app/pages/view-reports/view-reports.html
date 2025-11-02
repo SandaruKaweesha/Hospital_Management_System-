@@ -183,7 +183,10 @@
         <td class="px-6 py-4">{{ medicalReport.getDate() }}</td>
         <td class="px-6 py-4">{{ medicalReport.getPdf() }}</td>
         <td class="px-6 py-4 gap-6 flex">
-          <button class="cursor-pointer">
+          <button
+            class="cursor-pointer"
+            (click)="deleteMedicalReport(medicalReport.getPatientId())"
+          >
             <svg
               class="w-6 h-6 text-gray-800 hover:text-red-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
               aria-hidden="true"
