@@ -21,6 +21,8 @@ export class ViewPatients implements OnInit {
 
   // Load the data from backend
   public patientsList: Patient[] = [];
+  public searchText: string = '';
+  public filteredPatientsList: Patient[] = [];
 
   loadPatients() {
     this.http
@@ -47,6 +49,7 @@ export class ViewPatients implements OnInit {
       )
       .subscribe((builtPatients: Patient[]) => {
         this.patientsList = builtPatients;
+        this.filteredPatientsList = builtPatients;
         console.log(this.patientsList);
         // app is using zoneless change detection (provideZonelessChangeDetection)    // so manually request a view update after async data arrives.
         this.cdr.detectChanges();
@@ -129,7 +132,20 @@ export class ViewPatients implements OnInit {
     });
   }
 
-  searchPatient() {
-    console.log('Hello');
+  public filterPatients() {
+    // If the search box is empty, show all patients
+    if (!this.searchText) {
+      this.filteredPatientsList = this.patientsList;
+      return;
+    }
+
+    const search = this.searchText.toLowerCase();
+
+    // Filter your master list (patientsList) and put the results
+    // into your display list (filteredPatientsList)
+    this.filteredPatientsList = this.patientsList.filter((patient) =>
+      // We use JSON.stringify to search all properties of the patient
+      JSON.stringify(patient).toLowerCase().includes(search)
+    );
   }
 }
