@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MedicalReport } from '../../model/MedicalReport';
 import { map } from 'rxjs';
-import { joinAllInternals } from 'rxjs/internal/operators/joinAllInternals';
+import { initFlowbite } from 'flowbite';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ViewReports implements OnInit {
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
+    initFlowbite();
     this.loadReports();
   }
   public allReport: MedicalReport[] = [];
@@ -39,6 +40,7 @@ export class ViewReports implements OnInit {
       .subscribe((medicalRecord: MedicalReport[]) => {
         this.allReport = medicalRecord;
         this.cdr.detectChanges();
+        initFlowbite();
       });
   }
   deleteMedicalReport(id: any) {
@@ -86,6 +88,32 @@ export class ViewReports implements OnInit {
       });
   }
 
-  selectPatient() {}
-  updateReport() {}
+  public selectReport: any = {};
+  selectPatient(selectedReport: MedicalReport) {
+    this.selectReport = selectedReport;
+    console.log(this.selectReport);
+  }
+
+  updateMedicalReport() {
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.http
+          .put('http://localhost:8080/medical-report/update', this.selectReport)
+          .subscribe((data) => {
+            this.loadReports();
+
+            Swal.fire('Saved!', '', 'success');
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
+  }
 }

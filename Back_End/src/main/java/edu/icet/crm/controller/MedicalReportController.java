@@ -23,6 +23,10 @@ public class MedicalReportController {
         medicalReportService.add(medicalReport);
     }
 
+    @PutMapping("/update")
+    public void updateReport(@RequestBody MedicalReport MedicalReportService){
+        medicalReportService.add(MedicalReportService);
+    }
 
     @GetMapping("/getAll")
     public List<MedicalReport> getReports(){
@@ -34,7 +38,8 @@ public class MedicalReportController {
     public  void deleteReport(@PathVariable int id){
         medicalReportService.deleteReport(id);
     }
-/// /////////////////////////////
+
+
     @GetMapping("/getByPatientId/{id}")
     public List<MedicalReport> getByPatientId(@PathVariable int id){
         System.out.println(id);
